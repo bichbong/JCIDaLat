@@ -1,0 +1,24 @@
+<div class="ui tiny header">
+  {{#link-to 'orders.view' record.identifier}}{{record.identifier}}{{/link-to}}
+  <span class="weight-400">
+    {{t 'by'}}
+    {{extraRecords.user.email}}
+  </span>
+  <div class="ui basic mini {{order-color record.status}} label attendees-margin">
+    {{record.status}}
+  </div>
+  <div class="sub header">
+    {{#if extraRecords.paidVia}}
+      <span class="weight-800">
+        {{t 'Payment via'}} {{extraRecords.paidVia}}
+      </span>
+    {{/if}}
+    {{#if (eq extraRecords.status 'completed')}}
+      {{moment-format extraRecords.completedAt 'MMMM Do YYYY, h:mm A -'}}
+      {{moment-from-now extraRecords.completedAt}}
+    {{else}}
+      {{moment-format extraRecords.createdAt 'MMMM Do YYYY, h:mm A -'}}
+      {{moment-from-now extraRecords.createdAt}}
+    {{/if}}
+  </div>
+</div>

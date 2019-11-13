@@ -1,0 +1,88 @@
+<div class="event">
+  {{#if model.event.description}}
+    <div class="description" id="info">
+      {{sanitize model.event.description}}
+    </div>
+    <div class="ui hidden divider"></div>
+  {{/if}}
+  {{#if (or model.event.ticketUrl model.tickets)}}
+    <div class="tickets" id="tickets">
+      <div class="ui segments ticket-list">
+        <div class="ui segment">
+          <h3 class="ui header">{{t 'Tickets'}}</h3>
+        </div>
+        <div class="ui segment">
+          {{#if model.event.isTicketingEnabled}}
+            {{public/ticket-list eventCurrency=model.event.paymentCurrency
+                                 ticketUrl=model.event.ticketUrl
+                                 isTicketingEnabled=model.event.isTicketingEnabled
+                                 data=model.tickets
+                                 order=model.order
+                                 event=model.event
+                                 attendees=model.attendees
+                                 code=code
+                                 taxInfo=model.tax
+                                 currentEventIdentifier=model.event.identifier
+                                 createNewUserViaEmail=(action 'createNewUserViaEmail')
+                                 loginExistingUser=(action 'loginExistingUser')
+                                 isLoginModalOpen=isLoginModalOpen
+                                 placeOrder=(action 'placeOrder')
+                                 isLoading=isLoading
+                                 userExists=userExists
+                                 errorMessage=errorMessage
+                                 save='save'}}
+          {{else}}
+            <div class="ui grid">
+              <div class="ui row">
+                <div class="column">
+                  <a target="_blank" rel="noopener noreferrer" href="{{model.event.ticketUrl}}" class="ui right labeled blue icon button">
+                    <i class="ticket icon"></i>
+                    {{t 'Order tickets'}}
+                  </a>
+                </div>
+              </div>
+              <div class="ui row muted text">
+                <div class="column">
+                  {{t 'You will be taken to '}} {{model.event.ticketUrl}} {{t ' to complete the purchase of tickets'}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="ui hidden divider"></div>
+  {{/if}}
+  {{#if featuredSpeakers}}
+    <div class="featured-speakers" id="speakers">
+      <div class="row">
+        {{public/featured-speaker-list speakers=featuredSpeakers}}
+      </div>
+    </div>
+    <div class="ui hidden divider"></div>
+  {{/if}}
+  {{#if model.sponsors}}
+    <div class="sponsors">
+      <div class="row">
+        {{public/sponsor-list sponsors=model.sponsors}}
+      </div>
+    </div>
+    <div class="ui hidden divider"></div>
+  {{/if}}
+  {{#if model.event.hasOwnerInfo}}
+    <h2 class="ui header" id="owner">
+      {{t 'Organized  by'}} {{model.event.ownerName}}
+    </h2>
+    {{sanitize model.event.ownerDescription}}
+    <div class="ui hidden divider"></div>
+  {{/if}}
+  <div class="location" id="getting-here">
+    {{public/event-map event=model.event}}
+  </div>
+  <div class="ui hidden divider"></div>
+  {{#if model.event.copyright}}
+    <div class="copyright">
+      {{public/copyright-item copyright=model.event.copyright}}
+    </div>
+  {{/if}}
+</div>

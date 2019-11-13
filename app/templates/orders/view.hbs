@@ -1,0 +1,50 @@
+<div class="ui one column container stackable doubling left grid">
+  <div class="row print">
+    <div class="column">
+      <h2>{{model.order.event.name}}</h2>
+    </div>
+  </div>
+  <div class="row print">
+    <div class="column">
+      <div class="ui small gray-text">
+        {{header-date model.order.event.startsAt}} - {{header-date model.order.event.endsAt}}
+        <br>
+        {{model.order.event.locationName}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="ten wide column print">
+      {{orders/order-summary data=model.order
+                             event=model.event
+                             eventCurrency=model.order.event.paymentCurrency}}
+    </div>
+    <div class="mobile hidden six wide column">
+      {{orders/event-info data=model.order}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="column right aligned">
+      <button class="ui labeled icon {{if isLoadingTickets 'loading'}} button" {{action downloadTickets model.event.name model.order.identifier}}>
+        <i class="ticket alternate icon"></i>
+        {{t 'Download Tickets'}}
+      </button>
+      <button {{action 'downloadInvoice' model.event.name model.order.identifier }} class="ui labeled icon blue {{if isLoadingInvoice 'loading'}} button">
+        <i class="download icon"></i>
+        {{t 'Download Invoice'}}
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="ten wide column">
+      {{forms/orders/attendee-list save='save' data=model.order fields=model.form}}
+    </div>
+    <div class="six wide column">
+      <div class="row">
+        <div class="mobile hidden row">
+          {{orders/ticket-holder data=model.order}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

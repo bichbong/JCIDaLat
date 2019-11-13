@@ -1,0 +1,8 @@
+<div class="weight-400">
+  {{currency-symbol extraRecords.event.paymentCurrency}}  {{format-number record}}
+</div>
+{{#if extraRecords.discountCode.code}}
+  <div class="ui mini yellow label">
+    {{extraRecords.discountCode.code}}
+  </div>
+{{/if}}

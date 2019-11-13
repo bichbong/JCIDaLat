@@ -1,0 +1,18 @@
+<div class="content">
+  {{#if (eq props.options.subject 'emailSubject')}}
+    <a class="header">{{sanitize extraRecords.emailSubject}}</a>
+  {{else if (eq props.options.subject 'notificationTitle')}}
+    {{#if extraRecords.notificationTitle}}
+      <a class="header">{{sanitize extraRecords.notificationTitle}}</a>
+    {{/if}} 
+  {{/if}}  
+  <div class="description">
+    {{#if (eq props.options.message 'emailMessage')}}
+      <p>{{sanitize record}}</p>
+    {{else if (eq props.options.message 'notificationMessage')}}
+      {{#if record}}     
+        <p>{{sanitize record}}</p>
+      {{/if}}
+    {{/if}}  
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="{{if isWide 'event wide ui grid row'}}">
+  {{#if isWide}}
+    {{#unless device.isMobile}}
+      <div class="ui card three wide computer six wide tablet column">
+        <a class="image" href="{{href-to (if isCFS 'public.cfs' 'public') event.identifier}}">
+          {{widgets/safe-image src=(if event.thumbnailImageUrl event.thumbnailImageUrl event.originalImageUrl)}}
+        </a>
+      </div>
+    {{/unless}}
+  {{/if}}
+  <div class="ui card {{unless isWide 'event fluid' 'thirteen wide computer ten wide tablet sixteen wide mobile column'}}">
+    {{#unless isWide}}
+      <a class="image" href="{{href-to (if isCFS 'public.cfs' 'public') event.identifier}}">
+        {{widgets/safe-image src=(if event.thumbnailImageUrl event.thumbnailImageUrl event.originalImageUrl)}}
+      </a>
+    {{/unless}}
+    <a class="main content" href="{{href-to (if isCFS 'public.cfs' 'public') event.identifier}}">
+      {{#smart-overflow class='header'}}
+        {{event.name}}
+      {{/smart-overflow}}
+      <div class="meta">
+        <span class="date">
+          {{moment-format event.startsAt 'ddd, MMM DD h:mm A'}}
+        </span>
+      </div>
+      {{#smart-overflow class='description'}}
+        {{event.shortLocationName}}
+      {{/smart-overflow}}
+    </a>
+    <div class="extra content small text">
+      <span class="right floated">
+        <i role="button" class="share alternate link icon" {{action shareEvent event}}></i>
+      </span>
+      <span>
+        {{#if hasBlock}}
+          {{yield}}
+        {{else}}
+          {{#if filterByTags}}
+            <a href="#"
+               class="link item {{if (eq category event.topic.name) 'active'}}"
+              {{action 'selectCategory' event.topic.name}}>
+              {{tags.[0]}}
+            </a>
+            <a href="#"
+               class="link item {{if (eq eventType event.type.name) 'active'}}"
+              {{action 'selectEventType' event.type.name}}>
+              {{tags.[1]}}
+            </a>
+            <a href="#"
+               class="link item {{if (eq subCategory event.subTopic.slug) 'active'}}"
+              {{action 'selectCategory' event.topic.name event.subTopic.slug}}>
+              {{tags.[2]}}
+            </a>
+          {{else}}
+            {{#each tags as |tag|}}
+              <a>{{tag}}</a>
+            {{/each}}
+          {{/if}}
+        {{/if}}
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+{{#ui-accordion}}
+  <div class="title">
+    <div class="ui">
+      <img alt="speaker" class="ui medium rounded image" src="{{if speaker.thumbnailImageUrl speaker.thumbnailImageUrl (if speaker.photoUrl speaker.photoUrl '/images/placeholders/avatar.png')}}">
+      <br>
+      <h3 class="ui centered header less margin">
+        {{speaker.name}}
+      </h3>
+      <p class="ui small centered disabled header less padding">
+        {{speaker.position}} {{speaker.organisation}}
+      </p>
+    </div>
+  </div>
+  <div class="ui vertical fluid menu content padded">
+    <div class="item">
+      <p class="word-break">
+        {{#if speaker.shortBiography}}
+          {{sanitize speaker.shortBiography}}
+        {{else if speaker.longBiography}}
+          {{sanitize speaker.longBiography}}
+        {{else if speaker.speakingExperience}}
+          {{sanitize speaker.speakingExperience}}
+        {{/if}}
+      </p>
+      {{#if hasSocialLinks}}
+        <div class="social-icons">
+          {{#if speaker.facebook}}
+            <a href={{speaker.facebook}} target="_blank" rel="noopener noreferrer"><i class="facebook f icon"></i></a>
+          {{/if}}
+          {{#if speaker.linkedin}}
+            <a href={{speaker.linkedin}} target="_blank" rel="noopener noreferrer"><i class="linkedin f icon"></i></a>
+          {{/if}}
+          {{#if speaker.twitter}}
+            <a href={{speaker.twitter}} target="_blank" rel="noopener noreferrer"><i class="twitter icon"></i></a>
+          {{/if}}
+          {{#if speaker.github}}
+            <a href={{speaker.github}} target="_blank" rel="noopener noreferrer"><i class="github icon"></i></a>
+          {{/if}}
+        </div>
+        <div class="ui divider"></div>
+      {{/if}}
+      <h3 class="ui header">
+        {{t 'Sessions'}}
+      </h3>
+      {{#each speaker.sessions as |session|}}
+        {{#if (or (eq session.state 'confirmed') (eq session.state 'accepted'))}}
+          <p>
+            {{#if session.startsAt}}
+              {{moment-format session.startsAt 'DD MMM YY'}}
+            {{/if}}
+            {{#if session.microlocation}}
+              <br>
+              <span class="session-location">
+                <strong>
+                  {{concat (t 'Microlocation - ') session.microlocation.name}}
+                </strong>
+              </span>
+            {{/if}}
+          </p>
+          <div class="ui fluid padded" style={{css color=session.track.fontColor background-color=session.track.color}}>
+            <h3 class="item">
+              {{#if (and session.startsAt session.endsAt)}}
+                {{moment-format session.startsAt 'HH:mm'}} - {{moment-format session.endsAt 'hh:mm'}}
+                <br>
+              {{/if}}
+              &bull;&nbsp; {{session.title}}
+              <br>
+            </h3>
+          </div>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+{{/ui-accordion}}

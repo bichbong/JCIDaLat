@@ -1,0 +1,27 @@
+{{#if (and (not-includes session.currentRouteName 'events.view') (not-includes session.currentRouteName 'events.my-sessions'))}}
+  {{unverified-user-message}}
+  <div class="row">
+    <div class="sixteen wide column">
+      {{#tabbed-navigation}}
+        {{#link-to 'events.list' 'live' class='item'}}
+          {{t 'Live'}}
+        {{/link-to}}
+        {{#link-to 'events.list' 'draft' class='item'}}
+          {{t 'Draft'}}
+        {{/link-to}}
+        {{#link-to 'events.list' 'past' class='item'}}
+          {{t 'Past'}}
+        {{/link-to}}
+        {{#link-to 'events.import' class='item'}}
+          {{t 'Import'}}
+        {{/link-to}}
+      {{/tabbed-navigation}}
+    </div>
+  </div>
+  <div class="ui basic segment" style="padding-top: 0">
+    {{outlet}}
+  </div>
+{{else}}
+  {{!-- the event specific view pages will be rendered without any of the above tabs --}}
+  {{outlet}}
+{{/if}}

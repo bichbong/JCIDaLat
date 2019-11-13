@@ -1,0 +1,19 @@
+{{#if record}}
+  {{#if extraRecords.endsAt}}
+    <div>
+      {{moment-format record 'MMMM DD, YYYY - hh:mm A'}}
+    </div>
+    (to)
+    <div>
+      {{moment-format extraRecords.endsAt 'MMMM DD, YYYY - hh:mm A'}}
+    </div>
+  {{else}}
+    <span>
+      {{t 'No dates available.'}}
+    </span>
+  {{/if}}
+{{else}}
+  <span>
+    {{t 'No dates available.'}}
+  </span>
+{{/if}}

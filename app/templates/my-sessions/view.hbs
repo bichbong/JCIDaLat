@@ -1,0 +1,83 @@
+<div class="ui container">
+  <div class="ui row">
+    {{#if (not model.isLocked)}}
+      {{#link-to 'public.cfs.edit-session' model.event.id model.id}}
+        <button class="ui blue button {{if device.isMobile 'fluid' 'right floated'}}">{{t 'Edit Session Proposal'}}</button>
+        {{#if device.isMobile}}
+          <div class="ui hidden fitted divider"></div>
+        {{/if}}
+      {{/link-to}}
+    {{/if}}
+    {{#each model.speakers as |speaker|}}
+      {{#if (eq speaker.email authManager.currentUser.email)}}
+        {{#link-to 'public.cfs.edit-speaker' model.event.id speaker.id}}
+          <button class="ui blue button {{if device.isMobile 'fluid' 'right floated'}}">{{t 'Edit Speaker- '}}{{speaker.name}}</button>
+          {{#if device.isMobile}}
+            <div class="ui hidden fitted divider"></div>
+          {{/if}}
+        {{/link-to}}
+      {{/if}}
+    {{/each}}
+    {{#if isUpcoming}}
+      <button class="ui red button {{if device.isMobile 'fluid' 'right floated'}}" {{action 'openProposalDeleteModal'}}>{{t 'Withdraw Proposal'}}</button>
+      {{#if device.isMobile}}
+        <div class="ui hidden fitted divider"></div>
+      {{/if}}
+    {{/if}}
+  </div>
+  <div class="ui row">
+    <h2 class="ui header left aligned">
+      {{t 'Session Details'}}
+    </h2>
+    <div class="ui segment">
+      <h3 class="ui header">
+        <div>
+          {{#if (eq model.state 'confirmed')}}
+            <div class="ui green large label">{{t 'Confirmed'}}</div>
+          {{else if (eq model.state 'pending')}}
+            <div class="ui yellow large label">{{t 'Pending'}}</div>
+          {{else if (eq model.state 'accepted')}}
+            <div class="ui yellow large label">{{t 'Accepted'}}</div>
+          {{else if (eq model.state 'rejected')}}
+            <div class="ui red large label">{{t 'Rejected'}}</div>
+          {{/if}}
+        </div>
+      </h3>
+      <div class="field">
+        <div class="ui divider"></div>
+        <h1 class="ui header"> {{model.title}} </h1>
+        <h4 class="ui header">
+          {{#each model.speakers as |speaker|}}
+            {{speaker.name}}
+          {{/each}}
+        </h4>
+        {{#if (not-eq model.startsAt null)}}
+          <h2 class="ui sub header"> <div class="ui gray-text">{{t 'From '}}{{moment-format model.startsAt 'ddd, MMM DD h:mm A'}}{{t ' to '}}{{moment-format model.endsAt 'ddd, MMM DD h:mm A'}}</div> </h2>
+        {{else}}
+          <h2 class="ui sub header"> <div class="ui gray-text">{{t 'Session Not Yet Scheduled'}}</div></h2>
+        {{/if}}
+      </div>
+      <div class="ui divider"></div>
+      {{#if model.shortAbstract}}
+        <h3 class="ui left aligned header">Short Abstract</h3>
+        <p> <i>{{sanitize model.shortAbstract}}</i> </p>
+      {{/if}}
+      {{#if model.sessionType.name}}
+        <h3 class="ui left aligned header">Session Type</h3>
+        <p>{{model.sessionType.name}}</p>
+      {{/if}}
+      {{#if model.track.name}}
+        <h3 class="ui left aligned header">Track</h3>
+        <p>{{model.track.name}}</p>
+      {{/if}}
+      {{#if model.slidesUrl}}
+        <h3 class="ui left aligned header">Slide</h3>
+        <a href="{{model.slidesUrl}}">{{t 'Download'}}</a>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+{{modals/proposal-delete-modal isOpen=isProposalDeleteModalOpen
+                              proposalName=model.title
+                              deleteProposal=(action 'deleteProposal')}}

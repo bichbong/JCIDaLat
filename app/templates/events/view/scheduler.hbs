@@ -1,0 +1,48 @@
+<div class="ui grid">
+  <div class="row">
+    <div class="sixteen wide mobile three wide computer column">
+      {{#if isSchedulePublished}}
+        <button class="ui orange {{if isLoading 'loading'}} fluid button" {{action 'togglePublishState'}}>{{t 'Unpublish Schedule'}}</button>
+      {{else}}
+        <button class="ui green {{if isLoading 'loading'}} fluid button" {{action 'togglePublishState'}}>{{t 'Publish Schedule'}}</button>
+      {{/if}}
+      <h3 class="ui header">{{t 'Unscheduled Sessions'}}</h3>
+      <div class="ui raised segments">
+        {{#each model.unscheduled as |session|}}
+          {{#if (or (eq session.state 'accepted') (eq session.state 'confirmed'))}}
+            {{scheduler/unscheduled-session session=session}}
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+    <div class="sixteen wide mobile thirteen wide computer column">
+      {{#if device.isMobile}}
+        <div class="ui hidden divider"></div>
+      {{/if}}
+      {{full-calendar events=model.events
+                      aspectRatio=(if device.isMobile 0.7 1.8)
+                      editable=true
+                      timezone=model.timezone
+                      droppable=true
+                      resources=model.resources
+                      groupByResource=true
+                      resourceLabelText= 'Rooms'
+                      header=model.header
+                      ondragover="{{action 'allowDrop' event}}"
+                      views=model.views
+                      viewName='agendaDay'
+                      drop=(action 'drop')
+                      eventResize=(action 'eventResize')
+                      eventDrop=(action 'eventDrop')
+                      eventRender=(action 'eventRender')
+                      defaultView='timelineDay'
+                      validRange=model.validRange
+                      now=(moment-format (now) 'YYYY-MM-DD')
+                      scrollTime= '00:00'
+                      minTime=model.minTime
+                      slotDuration='00:10:00'
+                      slotLabelFormat='HH:mm'
+      }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<h3 class="ui header">
+  <div class="content">
+    {{t 'Export and Download Event as Zip'}}
+    <div class="sub header">
+      {{t 'Select the media files you want in the zip'}}
+    </div>
+  </div>
+</h3>
+<div class="ui hidden divider"></div>
+<div class="ui container"></div>
+<div class="ui form {{if isLoading 'loading'}}">
+  <div class="field">
+    {{ui-checkbox class='toggle' label=(t 'Image') checked=data.image onChange=(action (mut data.image))}}
+  </div>
+  <div class="field">
+    {{ui-checkbox class='toggle' label=(t 'Video') checked=data.video onChange=(action (mut data.video))}}
+  </div>
+  <div class="field">
+    {{ui-checkbox class='toggle' label=(t 'Audio') checked=data.audio onChange=(action (mut data.audio))}}
+  </div>
+  <div class="field">
+    {{ui-checkbox class='toggle' label=(t 'Document') checked=data.document onChange=(action (mut data.document))}}
+  </div>
+  <div class="ui basic segment less left padding">
+    <button class="ui blue button" {{action startGeneration}}>
+      {{t 'Start'}}
+    </button>
+    <a href="#" class="ui button {{if isDownloadDisabled 'disabled' ''}}" {{action exportEventDownload eventDownloadUrl }}>
+      {{t 'Download'}}
+    </a>
+    <div class="hidden divider"></div>
+    <h4 class="ui header">Status: {{eventExportStatus}}</h4>
+  </div>
+</div>

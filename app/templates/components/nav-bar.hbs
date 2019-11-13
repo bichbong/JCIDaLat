@@ -1,0 +1,64 @@
+<div class="mobile hidden row">
+  <div class="ui menu">
+    {{#link-to 'index' class='header item' activeClass=''}}
+      <h3>{{settings.appName}}</h3>
+    {{/link-to}}
+    <div class="right menu nav-bar">
+      {{#link-to 'explore' class='item' activeClass=''}}{{t 'Browse Events'}}{{/link-to}}
+      {{#if session.isAuthenticated}}
+        {{notification-dropdown unreadNotifications=unreadNotifications}}
+      {{/if}}
+      {{#if session.isAuthenticated}}
+        {{#ui-dropdown class='item' action='hide'}}
+          {{widgets/safe-image isAvatar=true class='ui avatar round image nav-bar-image' src=(if authManager.currentUser.avatarUrl authManager.currentUser.avatarUrl
+                    '/images/placeholders/avatar.png')}}
+          {{if authManager.currentUser
+               (if authManager.currentUser.firstName authManager.currentUser.firstName authManager.currentUser.email)
+               'Welcome'}}
+          <i class="dropdown icon"></i>
+          <div class="menu profile-dropdown-menu">
+            <a href="{{href-to 'my-tickets'}}" class="item">{{t 'My Tickets'}}</a>
+            <a href="{{href-to 'my-sessions'}}" class="item">{{t 'My Sessions'}}</a>
+            <a href="{{href-to 'events.list' 'live'}}" class="item">{{t 'Manage Events'}}</a>
+            <div class="divider"></div>
+            <a href="{{href-to 'account.profile'}}" class="item">{{t 'Account'}}</a>
+            {{#if authManager.currentUser.isAnAdmin}}
+              <a href="{{href-to 'admin'}}" class="item">{{t 'Admin'}}</a>
+            {{/if}}
+            <div class="divider"></div>
+            <a role="button" class="item logout-button" {{action 'logout'}}><span>{{t 'Logout'}}<i class="ui right floated large signout sign out icon"></i></span></a>
+          </div>
+        {{/ui-dropdown}}
+      {{else}}
+        <a href="{{href-to 'login'}}" class="item">{{t 'Login'}}</a>
+      {{/if}}
+      {{#if (not-eq routing.currentRouteName 'create')}}
+        {{#link-to 'create' class='item ui blue text'}}
+          <div>
+            {{t 'Create Event'}}
+          </div>
+        {{/link-to}}
+      {{/if}}
+    </div>
+  </div>
+</div>
+<div class="mobile only row">
+  <div class="ui navbar tiny menu">
+    <a class="menu item open sidebar">
+      <i class="large content icon"></i>
+    </a>
+    {{#link-to 'index' class='item' activeClass=''}}
+      <div class="ui header small text">{{config.appName}}</div>
+    {{/link-to}}
+    <div class="right menu nav-bar">
+      {{#if session.isAuthenticated}}
+        {{notification-dropdown notifications=notifications}}
+      {{/if}}
+      {{#link-to 'create' class='item ui blue button-text small text'}}
+        <div>
+          {{t 'Create Event'}}
+        </div>
+      {{/link-to}}
+    </div>
+  </div>
+</div>
