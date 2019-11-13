@@ -8,7 +8,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "https://github.com/fossasia/open-event-frontend",
+  "repository": "https://github.com/bichbong/JCIDaLat",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
