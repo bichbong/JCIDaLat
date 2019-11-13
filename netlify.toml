@@ -1,8 +1,4 @@
 [context.production]
-  command = "ember build -prod"
+  command = "ember build tests"
   [context.production.environment]
     API_HOST = "https://jcidalat-event.herokuapp.com"
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
