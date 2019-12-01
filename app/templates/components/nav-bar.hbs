@@ -4,7 +4,7 @@
       <h3>{{settings.appName}}</h3>
     {{/link-to}}
     <div class="right menu nav-bar">
-      {{#link-to 'explore' class='item' activeClass=''}}{{t 'Browse Events'}}{{/link-to}}
+      {{#link-to 'explore' class='item' activeClass=''}}{{t 'Tìm sự kiện'}}{{/link-to}}
       {{#if session.isAuthenticated}}
         {{notification-dropdown unreadNotifications=unreadNotifications}}
       {{/if}}
@@ -35,7 +35,7 @@
       {{#if (not-eq routing.currentRouteName 'create')}}
         {{#link-to 'create' class='item ui blue text'}}
           <div>
-            {{t 'Create Event'}}
+            {{t 'Tạo sự kiện'}}
           </div>
         {{/link-to}}
       {{/if}}
