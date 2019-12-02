@@ -4166,7 +4166,7 @@ msgstr "Update tax information"
 
 #: app/templates/components/nav-bar.l10n.hbs:1
 msgid "Browse Events"
-msgstr "Tìm sự kiện"
+msgstr "Browse Events"
 
 #: app/templates/components/nav-bar.l10n.hbs:1
 msgid "Manage Events"
@@ -4178,7 +4178,7 @@ msgstr "Logout"
 
 #: app/templates/components/nav-bar.l10n.hbs:1
 msgid "Create Event"
-msgstr "Tạo sự kiện"
+msgstr "Create Event"
 
 #: app/templates/components/notification-dropdown.l10n.hbs:1
 msgid "Mark all as Read"
@@ -4574,7 +4574,7 @@ msgstr "Please click here to resend the confirmation mail."
 
 #: app/templates/components/welcome-header.l10n.hbs:1
 msgid "The simplest way to create events."
-msgstr "Cùng tham gia các sự kiện của JCI."
+msgstr "Join with us, JCI Da Lat."
 
 #: app/templates/components/widgets/forms/file-upload.l10n.hbs:1
 msgid "Are you sure want to remove this slide?"
