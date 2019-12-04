@@ -3,7 +3,7 @@ export const paymentCountries = ['VN', 'US', 'AL', 'AR', 'AU', 'AT', 'BE', 'BR',
 export const paymentCurrencies = [
   {
     paypal : true,
-    code   : 'VNĐ',
+    code   : 'VND',
     symbol : 'VNĐ',
     name   : 'Việt Nam Đồng',
     stripe : true,
