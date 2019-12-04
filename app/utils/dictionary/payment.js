@@ -4,8 +4,8 @@ export const paymentCurrencies = [
   {
     paypal : true,
     code   : 'VND',
-    symbol : 'VNĐ',
-    name   : 'Việt Nam Đồng',
+    symbol : 'VND',
+    name   : 'Viet Nam Dong',
     stripe : true,
     alipay : true,
     omise  : false,
