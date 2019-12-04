@@ -1,6 +1,16 @@
-export const paymentCountries = ['US', 'AL', 'AR', 'AU', 'AT', 'BE', 'BR', 'CA', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HK', 'HU', 'IE', 'IL', 'IN', 'IT', 'JP', 'LV', 'LT', 'LU', 'MY', 'MT', 'MX', 'NL', 'NZ', 'NO', 'PH', 'PL', 'PT', 'SG', 'SK', 'SI', 'ES', 'SE', 'CH', 'TW', 'GB'];
+export const paymentCountries = ['VN', 'US', 'AL', 'AR', 'AU', 'AT', 'BE', 'BR', 'CA', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HK', 'HU', 'IE', 'IL', 'IN', 'IT', 'JP', 'LV', 'LT', 'LU', 'MY', 'MT', 'MX', 'NL', 'NZ', 'NO', 'PH', 'PL', 'PT', 'SG', 'SK', 'SI', 'ES', 'SE', 'CH', 'TW', 'GB'];
 
 export const paymentCurrencies = [
+  {
+    paypal : true,
+    code   : 'VNĐ',
+    symbol : 'VNĐ',
+    name   : 'Việt Nam Đồng',
+    stripe : true,
+    alipay : true,
+    omise  : false,
+    paytm  : false
+  },
   {
     paypal : true,
     code   : 'PLN',
